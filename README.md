@@ -74,7 +74,8 @@ mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 7 stop
 
 Tell the user the number of stops between stations AND the stops IN ORDER that they will pass through or change at.
 ```rb
-stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') 
+mbta = Subway.new
+mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') 
 # "You must travel through the following stops on the Red line:"
 # "South Station, Kendall, Central, Harvard and Park Street"
 # "Change at Park Street."

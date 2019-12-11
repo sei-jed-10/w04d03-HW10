@@ -65,9 +65,9 @@ end
 And we should be able to find the number of stops with
 ```rb
 mbta = Subway.new
-mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Park Street')) // 3 stops
-mbta.stops_between_stations('Red', 'Alewife', 'Orange', 'Downtown Crossing') // 5 stops
-mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') // 7 stops
+mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Park Street')) # 3 stops
+mbta.stops_between_stations('Red', 'Alewife', 'Orange', 'Downtown Crossing') # 5 stops
+mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 7 stops
 ```
 
 ### Bonus

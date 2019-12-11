@@ -15,19 +15,19 @@ There are 3 subway lines:
 
 **Red line**
 - South Station
-- Park Street
 - Kendall
 - Central
 - Harvard
+- Park Street
 - Porter
 - Davis
 - Alewife
 
 **Green line** 
 - Government Center
-- Park Street
 - Boylston
 - Arlington
+- Park Street
 - Copley
 - Hynes
 - Kenmore
@@ -35,10 +35,10 @@ There are 3 subway lines:
 **Orange line**
 - North Station
 - Haymarket
-- Park Street
 - State
 - Downtown Crossing
 - Chinatown
+- Park Street
 - Back Bay
 - Forest Hills
 
@@ -65,22 +65,21 @@ end
 And we should be able to find the number of stops with
 ```rb
 mbta = Subway.new
-mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Alewife') # 0
-mbta.stops_between_stations('Red', 'Alewife', 'Red', 'South Station') # 7
-mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 6
+mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Park Street')) // 3 stops
+mbta.stops_between_stations('Red', 'Alewife', 'Orange', 'Downtown Crossing') // 5 stops
+mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') // 7 stops
 ```
 
 ### Bonus
 
 Tell the user the number of stops between stations AND the stops IN ORDER that they will pass through or change at.
 ```rb
-mbta = Subway.new
-mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') 
+stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') 
 # "You must travel through the following stops on the Red line:"
-# "South Station and Park Street"
+# "South Station, Kendall, Central, Harvard and Park Street"
 # "Change at Park Street."
 # "Your trip continues through the following stops on Green Line:" 
-# "Boylston, Arlington, Copley, Hines, and Kenmore."
+# "Copley, Hines, and Kenmore."
 # "7 stops in total."
 ```
 

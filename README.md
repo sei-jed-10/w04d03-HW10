@@ -48,17 +48,22 @@ All 3 subway lines intersect at Park Street, but there are no other intersection
 
 Tell the user the number of stops between stations using ruby classes.
 ```rb
+
 class Subway
+# Class subway had stops_between_stations methods which will call the method in class line
   def stops_between_stations(start_line, start_station, end_line, end_station)
   end
 end
   
 # One line, all the stations on that line
 class Line
+# It has initialize which will have stations and methods that will return index staion,
+# Also, method that count one line
 end
 
 # One station
 class Station
+# It has initialize for the name
 end
 ```
 

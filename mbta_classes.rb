@@ -93,21 +93,7 @@ class Subway
                 
               end 
             end #of outer else
-        end #of stops_between_stations method
-    
-    
-        # def get_input ()
-        #     input=[]
-        #     questions=['Start Line: ','Start Station: ','End Line: ','End Station: ']
-        #     puts "\n** Please Enter the Following **"
-        #     for question in questions
-        #         print question
-        #         input.push(gets.chomp)
-        #     end
-        #     self.stops_between_stations(input[0],input[1],input[2],input[3])
-        #    end
-    
-           
+        end #of stops_between_stations method           
       end #of class Subway
         
       # One line, all the stations on that line
@@ -195,9 +181,7 @@ class Subway
        mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Park Street') # 3 stops
        mbta.stops_between_stations('Red', 'Alewife', 'Orange', 'Downtown Crossing') # 5 stops
        mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 7 stops
-       
-    #    mbta.get_input()
-    
+           
        
     
     

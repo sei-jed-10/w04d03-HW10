@@ -12,7 +12,7 @@ class Subway
     
         def getSubwayLineList(inputLine)
             for line in @subway_line_list #loop through the array of subway_line_list
-                if(line.name==inputLine.downcase) #compare each line name with the name used as an input.
+                if(line.name.downcase==inputLine.downcase) #compare each line name with the name used as an input.
                 return line #if it exists, return reference of that line
                 end
             end
@@ -41,14 +41,16 @@ class Subway
         
                     else #start and end stations are different.
                         puts "\nYou must travel through the following stops on the #{start_line} line:"
+                        if (startSubwayLineList.already_passed_the_destination(start_station,end_station)) #if 'Park Street''s index is bigger than the index for the end station:
+                            startSubwayLineList.list_of_stations=startSubwayLineList.get_reversed_list #Reverse the end line list of stations (so that we can get the list of stations from the intersection to the end station)
+                        end
                         for station in startSubwayLineList.list_of_stations #loop through all stations on that line.
-                            print station.name #print each station.
-                            if (!(station.name==end_station)) #as long as the end station on that line hasn't been reached yet:
-                                print ", " #add commas between station names.
+                            if (!(station.name.downcase==end_station.downcase)) #as long as the end station on that line hasn't been reached yet:
+                                print "#{station.name}, " #add commas between station names.
                         
                             else #if the station in the current itration is the end station.
-                            print "."
-                            numberOfStops=startSubwayLineList.get_station_index(start_station)-startSubwayLineList.get_station_index(end_station) #calculate the number of stops by getting the difference between the indices of the start and end stations on that line.
+                            print "and #{station.name}."
+                            numberOfStops=(startSubwayLineList.get_station_index(start_station)-startSubwayLineList.get_station_index(end_station)).abs #calculate the number of stops by getting the difference between the indices of the start and end stations on that line.
                             puts  "\n" +numberOfStops.to_s+" stops in total." #print the total number of stops.
                             return
                             end #of inner if .. else (for printing stations)
@@ -57,17 +59,21 @@ class Subway
         
                 else #start subway line != end subway line.
                 puts "\nYou must travel through the following stops on the #{start_line} line:"
-                    for station in startSubwayLineList.list_of_stations
+                if (startSubwayLineList.already_passed_the_destination(start_station,$intersection)) #if 'Park Street''s index is bigger than the index for the end station:
+                    temp_start_list=startSubwayLineList.list_of_stations
+                    startSubwayLineList.list_of_stations=startSubwayLineList.get_reversed_list #Reverse the end line list of stations (so that we can get the list of stations from the intersection to the end station)
+                end
+                startSubwayLineList.list_of_stations[(startSubwayLineList.get_station_index(start_station))..-1].each {|station|
                     #same as before, keep printing station names and seperate them by commas except when we reach "Park Street".
-                        if (!(station.name==$intersection))
+                        if (!(station.name.downcase==$intersection.downcase))
                           print station.name+", "
                 
                         else
                           print "and "+$intersection+"."
                           break
                           end #of inner if (printing stations)
-                      end #of for loop.
-        
+                     # end #of for loop.
+                    }
                 puts "\nChange at "+$intersection
                 puts "Your trip continues through the following stops on #{end_line} Line:" 
             #loop through the stations of the end subway line list starting from the index of the intersection until the end station.
@@ -75,7 +81,7 @@ class Subway
                 endSubwayLineList.list_of_stations=endSubwayLineList.get_reversed_list #Reverse the end line list of stations (so that we can get the list of stations from the intersection to the end station)
             end
             endSubwayLineList.list_of_stations[(endSubwayLineList.get_station_index($intersection)+1)..-1].each {|endLineStation|
-                if(endLineStation.name==end_station)
+                if(endLineStation.name.downcase==end_station.downcase)
                   print "and "+endLineStation.name+"."
                 #calculate and print the total number of stops.
                 #First we need to calculate the difference between the index of the start station and the intersection on the start line.
@@ -93,7 +99,20 @@ class Subway
                 
               end 
             end #of outer else
-        end #of stops_between_stations method           
+        end #of stops_between_stations method
+        
+        def get_input
+            input=[] #will use it to store the information the user will provide.
+            questions=["Start Line: ","Start Station: ","End Line: ","End Station: "] #list of questions to ask he user.
+            puts "\n** Please Enter the Following **"
+             for question in questions #loop through all the questions, printing each one
+                 print question
+                 input<< gets.chomp #push the user answer into 'input' array.
+             end
+             #call stops_between_stations method with the user input.
+            self.stops_between_stations(input[0],input[1],input[2],input[3]) 
+            #input[0..3]represent start_line, start_station, end_line and end_station respectively.
+        end
       end #of class Subway
         
       # One line, all the stations on that line
@@ -118,7 +137,7 @@ class Subway
         # a method to be used to return the index of a station in the line's array of stations.
         def get_station_index(station_name) #The method takes the station name that we're trying to find its index as a parameter.
             for station in list_of_stations #loop through each station in the array
-                if station.name==station_name #check if the name of the current station matches the input name
+                if station.name.downcase==station_name.downcase #check if the name of the current station matches the input name
                     return list_of_stations.index(station) #if so, return the index of that station.
                 end
             end
@@ -126,7 +145,7 @@ class Subway
         end
     
         def already_passed_the_destination(intersection,destination) 
-            if (get_station_index(intersection)>get_station_index(destination))
+            if (get_station_index(intersection.downcase)>get_station_index(destination.downcase))
                 return true
             end
     
@@ -134,7 +153,7 @@ class Subway
     
     #will use the following method as a follow-up to 'already_passed_the_destination' method to get the correct order of stations.
         def get_reversed_list 
-            temp_list=list_of_stations.reverse 
+            temp_list=list_of_stations.reverse
             return temp_list;
         end
     
@@ -181,6 +200,8 @@ class Subway
        mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Park Street') # 3 stops
        mbta.stops_between_stations('Red', 'Alewife', 'Orange', 'Downtown Crossing') # 5 stops
        mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 7 stops
+
+       mbta.get_input #get input from the user.
            
        
     

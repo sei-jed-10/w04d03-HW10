@@ -50,7 +50,7 @@ Tell the user the number of stops between stations using ruby classes.
 ```rb
 
 class Subway
-# Class subway had stops_between_stations methods which will call the method in class line
+# Class subway has stops_between_stations methods which will call the method in class line
   def stops_between_stations(start_line, start_station, end_line, end_station)
   end
 end

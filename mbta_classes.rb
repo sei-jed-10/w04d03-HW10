@@ -2,7 +2,7 @@
 class Subway 
 
   def initialize()
-    @lin = Line.new # an opject to use it function
+    @lin = Line.new # Line object
   end 
  
    def stops_between_stations (start_line,start_station, end_line, end_station) 
@@ -65,39 +65,30 @@ class Subway
      end
    end 
  end #for def
- end #for class
+end #for class
  
  
        
- # One line, all the stations on that line
- class Line
-   attr_accessor :lines 
+# One line, all the stations on that line
+class Line
+  attr_accessor :lines 
   
-   # It has initialize which will have stations 
+  # It has initialize which will have stations 
   def initialize()
     @lines = {
     "red" =>["South Station" ,"Kendall" ,"Central","Harvard","Park Street","Porter" ,"Davis" ,"Alewife"],
     "green" =>["Government Center","Boylston" ,"Arlington" ,"Park Street" ,"Copley" ,"Hynes","Kenmore" ],
     "orange"=>["North Station","Haymarket" ,"State" ,"Downtown Crossing","Chinatown" ,"Park Street" ,"Back Bay" ,"Forest Hills" ]
-     }
+    }
   end
    
-   def call_station ()
-     @lines.map{|stat|
-     Station.new(stat) } 
-   end
- 
-   #methods that will return index station
-   def station_index(station_name) 
-     for station in arr_stat
-       if station.name==station_name 
-         return arr_stat.index(station)
-       end
-     end 
-   end
+  def call_station ()
+    @lines.map{|stat|
+    Station.new(stat) } 
+  end
  
    # method that count one line
-   def Stops_loop (arr)# counter of Number of stops
+   def Stops_loop (arr)# counter for Number of stops
     stops = -1
      for lines in arr do
        stops +=1
@@ -105,22 +96,22 @@ class Subway
     return stops
    end
  
- end
+end
  
  
- # One station
- class Station
+# One station
+class Station
    attr_accessor :name 
    # It has initialize for the name
    def initialize (name)
      @name = name
    end   
- end
+end
  
  
  
- mbta = Subway.new
- mbta.stops_between_stations('red', 'Alewife', 'red', 'Park Street') # 3 stops
- #mbta.stops_between_stations('red','Park Street', 'red', 'Alewife') # 3 stops
- #mbta.stops_between_stations('red', 'Alewife', 'orange', 'Downtown Crossing') # 5 stops
- #mbta.stops_between_stations('red', 'South Station', 'green', 'Kenmore') # 7 stops
+mbta = Subway.new
+mbta.stops_between_stations('red', 'Alewife', 'red', 'Park Street') # 3 stops
+#mbta.stops_between_stations('red','Park Street', 'red', 'Alewife') # 3 stops
+#mbta.stops_between_stations('red', 'Alewife', 'orange', 'Downtown Crossing') # 5 stops
+#mbta.stops_between_stations('red', 'South Station', 'green', 'Kenmore') # 7 stops

@@ -22,14 +22,18 @@ class Subway
         if $start_line == $end_line 
             $stops = $e_station - $s_station
             p  "#{$stops} Stops"
-        
+
+            ########################################       
 
         elsif $start_line != $end_line
-            p "Whaaaaaaaaaaaaaaat"
+
+            $stops_t = ($p_start-$s_station)+($e_station-$p_end)
+            p  "#{$stops_t} Stops"
+
+            ###########################################
+
 
         end
-
-
     end
 end
 
@@ -56,6 +60,10 @@ class Station
     def initialize
         $s_station = $s_line.index($start_station)
         $e_station = $e_line.index($end_station)
+        $p_start = $s_line.index("Park Street")
+        $p_end = $e_line.index("Park Street")
+        #p $p_start
+        #p $p_end
 
         #p $s_station
         #p $e_station
@@ -68,5 +76,5 @@ end
 
 mbta = Subway.new
 #mbta.stops_between_stations('Red', 'Kendall', 'Red', 'Porter') # 3 stops
-mbta.stops_between_stations('Red', 'Alewife', 'Orange', 'Downtown Crossing') # 5 stops
-#mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 7 stops
+#mbta.stops_between_stations('Red', 'Alewife', 'Orange', 'Downtown Crossing') # 5 stops
+mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 7 stops

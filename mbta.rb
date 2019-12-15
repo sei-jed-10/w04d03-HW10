@@ -41,8 +41,8 @@ class Subway
         
                     else #start and end stations are different.
                         puts "\nYou must travel through the following stops on the #{start_line} line:"
-                        if (startSubwayLineList.already_passed_the_destination(start_station,end_station)) #if 'Park Street''s index is bigger than the index for the end station:
-                            startSubwayLineList.list_of_stations=startSubwayLineList.get_reversed_list #Reverse the end line list of stations (so that we can get the list of stations from the intersection to the end station)
+                        if (startSubwayLineList.already_passed_the_destination(start_station,end_station)) #if 'end station's index is bigger than start station's index.:
+                            startSubwayLineList.list_of_stations=startSubwayLineList.get_reversed_list #Reverse the end line list of stations for that line.
                         end
                         for station in startSubwayLineList.list_of_stations #loop through all stations on that line.
                             if (!(station.name.downcase==end_station.downcase)) #as long as the end station on that line hasn't been reached yet:

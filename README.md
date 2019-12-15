@@ -92,3 +92,113 @@ mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore')
 ### Double Bonus
 
 Use `get` to allow the user to input their start line, start station, end line, and end station.
+
+
+
+class Subway
+attr_accessor :start_line
+attr_accessor :start_station
+attr_accessor :end_line
+attr_accessor :end_station
+# Class subway has stops_between_stations methods which will call the method in class line
+  def stops_between_stations(start_line, start_station, end_line, end_station)
+    Line.initialize(start_line, start_station, end_line, end_station)
+  end
+end
+
+# One line, all the stations on that line
+class Line
+
+#def self.method
+#   return "This is a method_from_class_A"
+#end
+
+# It has initialize which will have stations and methods that will return index staion,
+# Also, method that count one line
+def self.initialize(start_line, start_station, end_line, end_station)
+#############
+subway_lines = [
+     red=[
+      "South Station",
+      "Kendall",
+      "Central",
+      "Harvard",
+      "Park Street",
+      "Porter",
+      "Davis",
+      "Alewife"
+      ],
+      green=[
+      "Government Center",
+      "Boylston",
+      "Arlington",
+      "Park Street",
+      "Copley",
+      "Hynes",
+      "Kenmore"
+    ],
+    orange=[
+      "North Station",
+      "Haymarket",
+      "State",
+      "Downtown Crossing",
+      "Chinatown",
+      "Park Street",
+      "Back Bay",
+      "Forest Hills"
+    ]
+  ]
+#############
+
+
+
+@start_line = start_line
+@start_station = start_station
+@end_line = end_line
+@end_station = end_station
+
+
+subway_lines.each{ |name|
+if (start_line=='Red')
+#@start_line = start_line
+p subway_lines[0]
+elsif (start_line=='Green')
+#@start_line = start_line
+p subway_lines[1]
+elsif if (start_line=='Orange')
+#@start_line = start_line
+p subway_lines[2]
+end
+
+}
+
+Line.get_index
+Line.count_one_line
+end
+
+def self.get_index
+$start_station_index = (@start_line).index(@start_station)
+$end_station_index = (@end_line).index(@end_station)
+p @start_line.index(@start_station)
+p $end_station_index
+end
+
+def self.count_one_line
+  if (@start_line === @end_line)
+   return ($start_station_index - $end_station_index).abs
+  end
+end  
+
+
+
+
+end
+
+# One station
+class Station
+# It has initialize for the name
+end
+
+
+mbta = Subway.new
+mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Park Street') # 3 stops
